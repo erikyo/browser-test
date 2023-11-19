@@ -9,3 +9,10 @@
     padding: 3rem 0;
     margin: auto;
 }
+
+p.score {
+    color: #ef233c;
+    margin: 2rem auto 0;
+    font-weight: 600;
+    font-size: 1.3rem;
+}

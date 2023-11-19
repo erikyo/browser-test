@@ -55,6 +55,7 @@ const SecurityTest = () => {
 
     const [dataTableResults, setDataTableResults] = useState();
     const [testResults, setTestResults] = useState();
+    const [scoreResult, setScoreResult] = useState();
     const chartRef = useRef(null) as RefObject< HTMLCanvasElement >;
 
     const calculateSecurityScore = (results) => {
@@ -78,12 +79,14 @@ const SecurityTest = () => {
             return;
         }
 
-        const result = calculateSecurityScore(testResults);
+        const result = calculateSecurityScore(testResults).toFixed(2);
+
+        setScoreResult(result);
 
         const securityData = {
             labels: ['Security', 'Insecurity'],
             datasets: [{
-                data: [result, 100 - result],
+                data: [100 - result, result],
                 backgroundColor: ['#302b42', '#ef233c'],
             }],
         };
@@ -117,6 +120,7 @@ const SecurityTest = () => {
                     ref={chartRef}
                 />
             </div>
+            <p className="align-center score">Score {scoreResult}%</p>
             <div id="results"></div>
             <div  className={"data-table"}>
                 {dataTableResults ? <TableSecurityTest dataTableResults={dataTableResults}/> : null}
