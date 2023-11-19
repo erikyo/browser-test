@@ -279,7 +279,7 @@ export const checkSecurity = () => {
     displayResult('Available Fonts', document.fonts !== undefined && document.fonts.length > 0);
 
     // Check for installed plugins
-    displayResult('Installed Plugins', navigator.plugins !== undefined && navigator.plugins.length > 0);
+    displayResult('Installed Plugins', navigator?.plugins !== undefined && navigator.plugins);
 
     // Check for time zone offset
     displayResult('Time Zone Offset', new Date().getTimezoneOffset() !== undefined);
@@ -291,19 +291,19 @@ export const checkSecurity = () => {
     displayResult('Browser Language', navigator.language !== undefined && navigator.language !== '');
 
     // Check for browser version
-    displayResult('Browser Version', navigator.appVersion !== undefined && navigator.appVersion !== '');
+    displayResult('Browser Version', navigator?.appVersion !== undefined && navigator.appVersion !== '');
 
     // Check for browser vendor
-    displayResult('Browser Vendor', navigator.vendor !== undefined && navigator.vendor !== '');
+    displayResult('Browser Vendor', navigator?.vendor !== undefined && navigator.vendor !== '');
 
     // Check for browser rendering engine
-    displayResult('Browser Rendering Engine', navigator.appName !== undefined && navigator.appName !== '');
+    displayResult('Browser Rendering Engine', navigator?.appName !== undefined && navigator.appName !== '');
 
     // Check for CPU architecture
-    displayResult('CPU Architecture', navigator.cpuClass !== undefined && navigator.cpuClass !== '');
+    displayResult('CPU Architecture', navigator?.cpuClass !== undefined && navigator.cpuClass !== '');
 
     // Check for operating system
-    displayResult('Operating System', navigator.oscpu !== undefined && navigator.oscpu !== '');
+    displayResult('Operating System', navigator?.oscpu !== undefined && navigator.oscpu !== '');
 
     // Check for network connection type
     displayResult('Network Connection Type', navigator.connection !== undefined && navigator.connection.type !== undefined);
@@ -348,13 +348,13 @@ export const checkSecurity = () => {
     displayResult('Browser Indexed DB Support', window.indexedDB !== undefined);
 
     // Check for browser WebSQL support
-    displayResult('Browser WebSQL Support', window.openDatabase !== undefined);
+    displayResult('Browser WebSQL Support', window?.openDatabase);
 
     // Check for browser application cache support
-    displayResult('Browser Application Cache Support', window.applicationCache !== undefined);
+    displayResult('Browser Application Cache Support', window?.applicationCache !== undefined);
 
     // Check for browser offline support
-    displayResult('Browser Offline Support', window.applicationCache && window.applicationCache.addEventListener !== undefined);
+    displayResult('Browser Offline Support', window?.applicationCache && window.applicationCache.addEventListener !== undefined);
 
     // Check for browser performance navigation timing support
     displayResult('Browser Performance Navigation Timing Support', window.performance !== undefined && window.performance.getEntries !== undefined);
@@ -363,46 +363,46 @@ export const checkSecurity = () => {
     displayResult('Browser Timing API Support', window.performance.now !== undefined && window.performance.timing !== undefined);
 
     // Check for browser memory API support
-    displayResult('Browser Memory API Support', window.performance.memory !== undefined);
+    displayResult('Browser Memory API Support', window.performance?.memory !== undefined);
 
     // Check for browser navigation timing API support
     displayResult('Browser Navigation Timing API Support', window.performance.getEntriesByType('navigation') !== undefined);
 // **Device-related checks**
 
     // Check for device model
-    displayResult('Device Model', navigator.userAgentData.mobile !== undefined && navigator.userAgentData.mobile.model !== undefined);
+    displayResult('Device Model', navigator?.userAgentData?.mobile !== undefined && navigator.userAgentData.mobile.model !== undefined);
 
     // Check for device type
-    displayResult('Device Type', navigator.userAgentData.mobile !== undefined && navigator.userAgentData.mobile.type !== undefined);
+    displayResult('Device Type', navigator?.userAgentData?.mobile !== undefined && navigator.userAgentData.mobile.type !== undefined);
 
     // Check for device brand
-    displayResult('Device Brand', navigator.userAgentData.mobile !== undefined && navigator.userAgentData.mobile.brand !== undefined);
+    displayResult('Device Brand', navigator?.userAgentData?.mobile !== undefined && navigator.userAgentData.mobile.brand !== undefined);
 
     // Check for device platform
-    displayResult('Device Platform', navigator.userAgentData.platform !== undefined && navigator.userAgentData.platform.toLowerCase() !== 'unknown');
+    displayResult('Device Platform', navigator?.userAgentData?.platform !== undefined && navigator.userAgentData.platform.toLowerCase() !== 'unknown');
 
     // Check for device architecture
-    displayResult('Device Architecture', navigator.userAgentData.platform !== undefined && navigator.userAgentData.platformArchitecture !== undefined);
+    displayResult('Device Architecture', navigator?.userAgentData?.platform !== undefined && navigator.userAgentData.platformArchitecture !== undefined);
 
     // Check for device OS version
-    displayResult('Device OS Version', navigator.userAgentData.platform !== undefined && navigator.userAgentData.platformVersion !== undefined);
+    displayResult('Device OS Version', navigator?.userAgentData?.platform !== undefined && navigator.userAgentData.platformVersion !== undefined);
 
     // Check for device battery level
-    displayResult('Device Battery Level', navigator.getBattery !== undefined);
+    displayResult('Device Battery Level', navigator?.getBattery !== undefined);
 
 // Check for CPU architecture
-    displayResult('CPU Architecture', navigator.cpuClass !== undefined && navigator.cpuClass);
+    displayResult('CPU Architecture', navigator?.cpuClass !== undefined && navigator.cpuClass);
 
     // Check for CPU cores
-    displayResult('CPU Cores', navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency);
+    displayResult('CPU Cores', navigator?.hardwareConcurrency !== undefined && navigator.hardwareConcurrency);
 
     // **Memory checks**
 
     // Check for total system memory
-    displayResult('Total System Memory', navigator.deviceMemory !== undefined && navigator.deviceMemory);
+    displayResult('Total System Memory', navigator?.deviceMemory !== undefined && navigator.deviceMemory);
 
     // Check for available system memory
-    displayResult('Available System Memory', navigator.memory && navigator.memory.available);
+    displayResult('Available System Memory', navigator?.memory && navigator.memory.available);
 
     // **Media device checks**
 
@@ -425,10 +425,10 @@ export const checkSecurity = () => {
     displayResult('Device Gyroscope Support', window.DeviceOrientationEvent !== undefined && window.DeviceOrientationEvent.prototype.addEventListener !== undefined);
 
     // Check for device light sensor support
-    displayResult('Device Light Sensor Support', window.AmbientLightSensor !== undefined && window.AmbientLightSensor.prototype.addEventListener !== undefined);
+    displayResult('Device Light Sensor Support', window?.AmbientLightSensor !== undefined && window.AmbientLightSensor.prototype.addEventListener !== undefined);
 
     // Check for device proximity sensor support
-    displayResult('Device Proximity Sensor Support', window.ProximitySensor !== undefined && window.ProximitySensor.prototype.addEventListener !== undefined);
+    displayResult('Device Proximity Sensor Support', window?.ProximitySensor !== undefined && window.ProximitySensor.prototype.addEventListener !== undefined);
 
     // **WebRTC-related checks**
 
@@ -436,10 +436,10 @@ export const checkSecurity = () => {
     displayResult('WebRTC Support', RTCPeerConnection !== undefined);
 
     // Check for STUN server support
-    displayResult('STUN Server Support', navigator.connection.getSTUNServer !== undefined && navigator.connection.getSTUNServer );
+    displayResult('STUN Server Support', navigator?.connection?.getSTUNServer !== undefined && navigator.connection.getSTUNServer );
 
     // Check for TURN server support
-    displayResult('TURN Server Support', navigator.connection.getTURNServer !== undefined && navigator.connection.getTURNServer );
+    displayResult('TURN Server Support', navigator?.connection?.getTURNServer !== undefined && navigator.connection.getTURNServer );
 
     // **Misc checks**
 
