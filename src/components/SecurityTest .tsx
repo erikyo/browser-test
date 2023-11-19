@@ -101,7 +101,7 @@ const SecurityTest = () => {
         };
 
         new Chart(
-            chartRef?.current as HTMLCanvasElement, {
+            chartRef?.current , {
                 type: 'doughnut',
                 data: securityData,
                 options: securityOptions,

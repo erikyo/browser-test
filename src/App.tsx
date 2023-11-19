@@ -3,9 +3,7 @@ import SecurityTest from "./components/SecurityTest .tsx";
 
 function App() {
 
-  return (
-      <SecurityTest />
-  )
+  return <SecurityTest />
 }
 
 export default App

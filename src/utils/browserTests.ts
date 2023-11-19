@@ -7,11 +7,11 @@ export const checkSecurity = () => {
         result: string | boolean;
         status: string;
     }
-    const newTestResults: { [key:string] : string | boolean } = {};
+    const newTestResults: Record<string, string | boolean> = {};
     const newDataTableResults: NewTestResults[]  = [];
 
     // Function to display test results
-    const displayResult = (testName:string, result: string | boolean) => {
+    const displayResult = (testName:string, result: string | boolean | object) => {
         const status = result ? '☑️' : '📛';
 
         // Add the result and status to the dataTableResults object
@@ -217,7 +217,7 @@ export const checkSecurity = () => {
     // **HTTPS-related checks**
 
     // Check for HTTPS strict transport security (HSTS)
-    displayResult('HSTS', navigator.securityPolicy && navigator.securityPolicy.includes('strict-transport-security') );
+    displayResult('HSTS', navigator.securityPolicy?.includes('strict-transport-security') );
 
     // Check for HTTPS content type options (CTO)
     displayResult('CTO', document.contentType.startsWith('text/html') && document.contentType.includes('; charset=UTF-8'));
@@ -357,7 +357,7 @@ export const checkSecurity = () => {
     displayResult('Browser Offline Support', window?.applicationCache && window.applicationCache.addEventListener !== undefined);
 
     // Check for browser performance navigation timing support
-    displayResult('Browser Performance Navigation Timing Support', window.performance !== undefined && window.performance.getEntries !== undefined);
+    displayResult('Browser Performance Navigation Timing Support', window.performance?.getEntries !== undefined);
 
     // Check for browser timing API support
     displayResult('Browser Timing API Support', window.performance.now !== undefined && window.performance.timing !== undefined);
@@ -402,7 +402,7 @@ export const checkSecurity = () => {
     displayResult('Total System Memory', navigator?.deviceMemory !== undefined && navigator.deviceMemory);
 
     // Check for available system memory
-    displayResult('Available System Memory', navigator?.memory && navigator.memory.available);
+    displayResult('Available System Memory', navigator?.memory?.available);
 
     // **Media device checks**
 
@@ -444,7 +444,7 @@ export const checkSecurity = () => {
     // **Misc checks**
 
     // Check for screen orientation
-    displayResult('Screen Orientation', window.screen.orientation !== undefined && window.screen.orientation.type !== undefined && window.screen.orientation.type);
+    displayResult('Screen Orientation', window.screen.orientation?.type !== undefined && window.screen.orientation.type);
 
     // Check for default font family
     displayResult('Default Font Family', document.body.style.fontFamily !== undefined && document.body.style.fontFamily !== '');
