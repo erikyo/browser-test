@@ -1,0 +1,6 @@
+#recap li {
+    display: block;
+}
+#recap li label {
+    font-weight: 600;
+}
