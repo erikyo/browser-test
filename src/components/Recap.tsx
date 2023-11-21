@@ -1,5 +1,4 @@
 import {getBrowser, getBrowserVersion, getDevice, getDeviceType, getOS} from "../utils";
-import './Recap.css'
 
 function Recap() {
     const Browser = getBrowser()
@@ -10,12 +9,12 @@ function Recap() {
     return  (
         <div id={'recap'}>
             <ul>
-                <li><label>User Agent::</label> {window.navigator.userAgent}</li>
-                <li><label>Browser:</label> {Browser}</li>
-                <li><label>OS:</label> {OS}</li>
-                <li><label>Device:</label> {Device}</li>
-                <li><label>BrowserVersion:</label> {BrowserVersion}</li>
-                <li><label>DeviceType:</label> {DeviceType}</li>
+                <li><b>User Agent:</b> {window.navigator.userAgent}</li>
+                <li><b>Browser:</b> {Browser}</li>
+                <li><b>OS:</b> {OS}</li>
+                <li><b>Device:</b> {Device}</li>
+                <li><b>BrowserVersion:</b> {BrowserVersion}</li>
+                <li><b>DeviceType:</b> {DeviceType}</li>
             </ul>
         </div>
     );

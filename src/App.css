@@ -1,13 +1,4 @@
-.data-table {
-    padding: 3rem 0;
-    margin: auto;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-p.score {
-    color: #ef233c;
-    margin: 2rem auto 0;
-    font-weight: 600;
-    font-size: 1.3rem;
+.data-table, .chart-wrapper {
+    margin: 0;
+    padding: 2rem 0;
 }
