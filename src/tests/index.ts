@@ -2,7 +2,7 @@
  * Security tests
  * @return {object} Test results object
  */
-export const checkSecurity = () => {
+const checkSecurity = () => {
     const newDataTableResults: {id: number, testName: string, result: string, value: boolean | string | number | object }[] = [];
     const newTestResults = {};
 
@@ -451,3 +451,5 @@ export const checkSecurity = () => {
     return {newTestResults, newDataTableResults}
 
 }
+
+export default checkSecurity;

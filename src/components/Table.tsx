@@ -1,4 +1,6 @@
-import DataTable, {TableColumn} from "react-data-table-component";
+import  {TableColumn} from "react-data-table-component";
+import {lazy, Suspense} from "react";
+import Loading from "./Loading.tsx";
 
 /**
  * Generates a table component with the provided data.
@@ -7,13 +9,14 @@ import DataTable, {TableColumn} from "react-data-table-component";
  * @param {Array} props.dataTableResults - The data to be displayed in the table.
  * @return {JSX.Element} - The rendered table component.
  */
-function Table(props) {
-    const {dataTableResults} = props;
+const Table = props => {
+    const { dataTableResults } = props;
+    const DataTable = lazy(() => import('react-data-table-component'));
 
     const columns: TableColumn<any> = [
         {
             name: 'ID',
-            selector: (row) => row.id,
+            selector: (row) => row.id.toString(),
             sortable: true,
             style: {
                 maxWidth: '32px',
@@ -24,7 +27,7 @@ function Table(props) {
             selector: (row) => row.testName,
             sortable: true,
             style: {
-                minWidth: '100px',
+                minWidth: '100px'
             }
         },
         {
@@ -50,11 +53,13 @@ function Table(props) {
     ]
 
     return (
-        <DataTable
-            columns={columns}
-            data={dataTableResults}
-        />
+        <Suspense fallback={<Loading />}>
+            <DataTable
+                columns={columns}
+                data={dataTableResults}
+            />
+        </Suspense>
     )
-}
+};
 
 export default Table
