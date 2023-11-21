@@ -1,3 +1,5 @@
+import {getClientIP} from "../utils";
+
 /**
  * Security tests
  * @return {object} Test results object
@@ -22,6 +24,10 @@ const checkSecurity = () => {
         // Save the test result
         newTestResults[testName] = test;
     };
+
+    // Client IP
+    const clientIP = getClientIP();
+    displayResult({testName: 'Client IP', test: clientIP, value: clientIP});
 
     // CacheStorage
     displayResult({testName: 'CacheStorage', test: 'caches' in window, value: window.caches});
@@ -136,9 +142,9 @@ const checkSecurity = () => {
 
 // Misc tests (continued)
     displayResult({testName: 'Fingerprinting resistance tests (continued)', test: 'navigator' in window && 'platform' in navigator && navigator.platform === ''});
-    displayResult({testName: 'Tracking query parameter tests (continued)', test: 'URLSearchParams' in window, value: new URLSearchParams('?test=value').has('test')});
-    displayResult({testName: 'Tracker content blocking tests (continued)', test: 'crypto' in window && 'subtle' in crypto, value: 'digest' in crypto.subtle});
-    displayResult({testName: 'Tracking cookie protection tests (continued)', test: 'cookieStore' in window, value: 'get' in cookieStore});
+    displayResult({testName: 'Tracking query parameter tests (continued)', test: 'URLSearchParams' in window && new URLSearchParams('?test=value').has('test')});
+    displayResult({testName: 'Tracker content blocking tests (continued)', test: 'crypto' in window && 'subtle' in crypto && 'digest' in crypto.subtle});
+    displayResult({testName: 'Tracking cookie protection tests (continued)', test: 'cookieStore' in window && 'get' in cookieStore});
 
 // Cross-session first-party tracking tests (continued)
     if ('sessionStorage' in window) {
@@ -289,13 +295,13 @@ const checkSecurity = () => {
     displayResult({testName: 'Browser Rendering Engine', test: navigator?.appName !== undefined, value: navigator.appName !== ''});
 
 // Check for CPU architecture
-    displayResult({testName: 'CPU Architecture', test: navigator?.cpuClass !== undefined, value: navigator.cpuClass !== ''});
+    displayResult({testName: 'CPU Architecture', test: navigator?.cpuClass !== undefined, value: navigator?.cpuClass !== ''});
 
 // Check for operating system
-    displayResult({testName: 'Operating System', test: navigator?.oscpu !== undefined, value: navigator.oscpu !== ''});
+    displayResult({testName: 'Operating System', test: navigator?.oscpu !== undefined, value: navigator?.oscpu !== ''});
 
 // Check for network connection type
-    displayResult({testName: 'Network Connection Type', test: 'connection' in navigator, value: navigator.connection.type !== undefined});
+    displayResult({testName: 'Network Connection Type', test: 'connection' in navigator, value: navigator?.connection?.type !== undefined});
 
 // Check for browser cookie support
     displayResult({testName: 'Browser Cookie Support', test: navigator.cookieEnabled !== undefined});
@@ -361,22 +367,22 @@ const checkSecurity = () => {
 // **Device-related checks**
 
 // Check for device model
-    displayResult({testName: 'Device Model', test: 'userAgentData' in navigator && navigator.userAgentData?.mobile !== undefined, value: navigator.userAgentData.mobile.model !== undefined});
+    displayResult({testName: 'Device Model', test: 'userAgentData' in navigator && navigator.userAgentData?.mobile !== undefined, value: navigator?.userAgentData?.mobile.model !== undefined});
 
 // Check for device type
-    displayResult({testName: 'Device Type', test: 'userAgentData' in navigator && navigator.userAgentData?.mobile !== undefined, value: navigator.userAgentData.mobile.type !== undefined});
+    displayResult({testName: 'Device Type', test: 'userAgentData' in navigator && navigator.userAgentData?.mobile !== undefined, value: navigator?.userAgentData?.mobile.type !== undefined});
 
 // Check for device brand
-    displayResult({testName: 'Device Brand', test: 'userAgentData' in navigator && navigator.userAgentData?.mobile !== undefined, value: navigator.userAgentData.mobile.brand !== undefined});
+    displayResult({testName: 'Device Brand', test: 'userAgentData' in navigator && navigator.userAgentData?.mobile !== undefined, value: navigator?.userAgentData?.mobile.brand !== undefined});
 
 // Check for device platform
-    displayResult({testName: 'Device Platform', test: 'userAgentData' in navigator && navigator.userAgentData?.platform !== undefined, value: navigator.userAgentData.platform.toLowerCase() !== 'unknown'});
+    displayResult({testName: 'Device Platform', test: 'userAgentData' in navigator && navigator.userAgentData?.platform !== undefined, value: navigator?.userAgentData?.platform.toLowerCase() !== 'unknown'});
 
 // Check for device architecture
-    displayResult({testName: 'Device Architecture', test: 'userAgentData' in navigator && navigator.userAgentData?.platform !== undefined, value: navigator.userAgentData.platformArchitecture !== undefined});
+    displayResult({testName: 'Device Architecture', test: 'userAgentData' in navigator && navigator.userAgentData?.platform !== undefined, value: navigator?.userAgentData?.platformArchitecture !== undefined});
 
 // Check for device OS version
-    displayResult({testName: 'Device OS Version', test: 'userAgentData' in navigator && navigator.userAgentData?.platform !== undefined, value: navigator.userAgentData.platformVersion !== undefined});
+    displayResult({testName: 'Device OS Version', test: 'userAgentData' in navigator && navigator.userAgentData?.platform !== undefined, value: navigator?.userAgentData?.platformVersion !== undefined});
 
 // Check for device battery level
     displayResult({testName: 'Device Battery Level', test: 'getBattery' in navigator, value: navigator.getBattery !== undefined});
@@ -427,10 +433,10 @@ const checkSecurity = () => {
     displayResult({testName: 'WebRTC Support', test: 'RTCPeerConnection' in window});
 
 // Check for STUN server support
-    displayResult({testName: 'STUN Server Support', test: 'connection' in navigator && 'getSTUNServer' in navigator.connection, value: navigator.connection.getSTUNServer});
+    displayResult({testName: 'STUN Server Support', test: 'connection' in navigator && 'getSTUNServer' in navigator.connection, value: navigator?.connection?.getSTUNServer});
 
 // Check for TURN server support
-    displayResult({testName: 'TURN Server Support', test: 'connection' in navigator && 'getTURNServer' in navigator.connection, value: navigator.connection.getTURNServer});
+    displayResult({testName: 'TURN Server Support', test: 'connection' in navigator && 'getTURNServer' in navigator.connection, value: navigator?.connection?.getTURNServer});
 
 // **Misc checks**
 
