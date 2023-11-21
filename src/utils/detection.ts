@@ -55,3 +55,27 @@ export function getDeviceType() {
         ["Unknown", /.+/i],
     ].find(([, value]) => (value as RegExp)?.test(window.navigator.userAgent)).shift();
 }
+
+export function getClientIP(): string | undefined {
+    // Try to use WebRTC API to get local IP addresses
+    const RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+    if (RTCPeerConnection) {
+        const rtc = new RTCPeerConnection({ iceServers: [] });
+        rtc.createDataChannel('');
+        rtc.createOffer().then(offer => rtc.setLocalDescription(offer));
+
+        rtc.onicecandidate = (event) => {
+            if (event.candidate) {
+                const ipMatch = event.candidate.candidate.match(/([0-9.]+)/);
+                if (ipMatch) {
+                    return ipMatch[1];
+                }
+            }
+        };
+
+        return 'Unknown';
+    }
+
+    // Fallback to unreliable methods (may not work in all cases)
+    return 'Unknown';
+}
