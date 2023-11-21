@@ -1,5 +1,5 @@
 import  {TableColumn} from "react-data-table-component";
-import {lazy, Suspense} from "react";
+import React,{lazy, Suspense} from "react";
 import Loading from "./Loading.tsx";
 
 /**
@@ -9,8 +9,12 @@ import Loading from "./Loading.tsx";
  * @param {Array} props.dataTableResults - The data to be displayed in the table.
  * @return {JSX.Element} - The rendered table component.
  */
-const Table = props => {
-    const { dataTableResults } = props;
+const Table = (props : {
+    title: string,
+    dataTableResults: NewTestResults[];
+}) => {
+    const { dataTableResults, title } = props;
+
     const DataTable = lazy(() => import('react-data-table-component'));
 
     const columns: TableColumn<any> = [
@@ -55,6 +59,7 @@ const Table = props => {
     return (
         <Suspense fallback={<Loading />}>
             <DataTable
+                title={title}
                 columns={columns}
                 data={dataTableResults}
             />

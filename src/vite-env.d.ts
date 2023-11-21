@@ -3,7 +3,7 @@
 interface NewTestList {
     testName: string;
     test: boolean | string | object;
-    value: boolean | string | number | object;
+    value?: boolean | string | number | object;
 }
 
 interface NewTestResults {
@@ -15,3 +15,4 @@ interface NewTestResults {
 }
 
 type ObjTest = Record<string, NewTestList[]>;
+type ObjResult = Record<string,NewTestResults[]>

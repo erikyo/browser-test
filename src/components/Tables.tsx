@@ -1,6 +1,7 @@
 import  {TableColumn} from "react-data-table-component";
-import {lazy, Suspense} from "react";
+import React, {lazy, Suspense} from "react";
 import Loading from "./Loading.tsx";
+import Table from "./Table.tsx";
 
 /**
  * Generates a table component with the provided data.
@@ -9,9 +10,16 @@ import Loading from "./Loading.tsx";
  * @param {Array} props.dataTableResults - The data to be displayed in the table.
  * @return {JSX.Element} - The rendered table component.
  */
-const Tables = props => {
-    const { dataTableResults } = props;
-    const DataTable = lazy(() => import('react-data-table-component'));
+const Tables = (props: ObjResult) => {
+
+
+    return( 
+        <div>
+        {Object.keys(props).map((key: string) => (
+          <Table key={key} title={key} dataTableResults={props[key]} />
+        ))}
+      </div>
+    )
 }
 
 export default Tables
