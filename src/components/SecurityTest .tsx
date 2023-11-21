@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {checkSecurity} from "../tests/";
+import checkSecurity from "../tests/";
 import Table from './Table.tsx';
 import Score from "./Score.tsx";
 import Recap from "./Recap.tsx";
@@ -21,8 +21,8 @@ const SecurityTest = () => {
     return (
         <main className="wrapper">
             <h1>Browser Security Test Results</h1>
-            {testResults ? <SecChart result={ roundToTwoDecimals(testResults) }/> : null}
-            {testResults ? <Score score={roundToTwoDecimals(testResults)} /> : null}
+            {testResults ? <SecChart result={roundToTwoDecimals(testResults)}/> : null}
+            <Score score={roundToTwoDecimals(testResults)} />
             <Recap />
             <div  className={"data-table"}>
                 {dataTableResults ? <Table dataTableResults={dataTableResults}/> : null}

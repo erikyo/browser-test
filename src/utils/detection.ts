@@ -31,21 +31,20 @@ export function getDevice() {
 }
 
 export function getBrowserVersion() {
-    const ua = window.navigator.userAgent;
-    const tem = ua.match(/version\/[\.\d]+/i);
-    if (tem != null) {
-        return tem[0].replace(/version\/[\.\d]+/i, '');
+    const ua = navigator.userAgent;
+    let tem: string[] | null;
+    let M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if (/trident/i.test(M[1])) {
+        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE ' + (tem[1] || '');
     }
-    return 'Unknown';
-}
-
-export function getOSVersion() {
-    const ua = window.navigator.userAgent;
-    const tem = ua.match(/windows nt [\.\d]+/i);
-    if (tem != null) {
-        return tem[0].replace(/windows nt [\.\d]+/i, '');
+    if (M[1] === 'Chrome') {
+        tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if (tem != null) return (tem).slice(1).join(' ').replace('OPR', 'Opera');
     }
-    return 'Unknown';
+    M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, '-?'];
+    if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+    return M.join(' ') || 'Unknown';
 }
 
 export function getDeviceType() {
