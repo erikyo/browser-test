@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useDeferredValue, useEffect, useState} from 'react';
 import Score from "./Score.tsx";
 import Recap from "./Recap.tsx";
 import SecChart from "./Chart.tsx";
@@ -12,13 +12,27 @@ const SecurityTestV2 = () => {
 
     const [dataTableResults, setDataTableResults] = useState<ObjResult>();
     const [testResults, setTestResults] = useState();
+    // useEffect( () => {
+    //     const newDataTableResults = checkSecuritiesByCategories(testObjects);
+    //     const { newTestResults } = checkSecurity();
+    //     setTestResults(newTestResults);
+    //     setDataTableResults(newDataTableResults);
+    //     //console.log(JSON.stringify(newDataTableResults))
+
+        
+    // }, [])
+
+    const fetchData = useCallback(async () => {
+        const newDataTableResults = await checkSecuritiesByCategories(testObjects);
+        setDataTableResults(newDataTableResults);
+      }, [])
+
 
     useEffect( () => {
+        fetchData().catch(e => console.log(e))
         const { newTestResults } = checkSecurity();
-        const newDataTableResults = checkSecuritiesByCategories(testObjects);
         setTestResults(newTestResults);
-        setDataTableResults(newDataTableResults);
-    }, [])
+    }, [fetchData])
 
     return (
         <main className="wrapper p-8">

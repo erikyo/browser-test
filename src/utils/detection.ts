@@ -56,26 +56,52 @@ export function getDeviceType() {
     ].find(([, value]) => (value as RegExp)?.test(window.navigator.userAgent)).shift();
 }
 
-export function getClientIP(): string | undefined {
-    // Try to use WebRTC API to get local IP addresses
-    const RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-    if (RTCPeerConnection) {
-        const rtc = new RTCPeerConnection({ iceServers: [] });
-        rtc.createDataChannel('');
-        rtc.createOffer().then(offer => rtc.setLocalDescription(offer));
+// export function getClientIP(): string | undefined {
+//     // Try to use WebRTC API to get local IP addresses
+//     const RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
 
-        rtc.onicecandidate = (event) => {
-            if (event.candidate) {
-                const ipMatch = event.candidate.candidate.match(/([0-9.]+)/);
-                if (ipMatch) {
-                    return ipMatch[1];
-                }
-            }
-        };
+//     if (RTCPeerConnection !== undefined) {
+//         const rtc = new RTCPeerConnection({ iceServers: [] });
+//         rtc.createDataChannel('');
+//         rtc.createOffer().then(offer => rtc.setLocalDescription(offer));
 
-        return 'Unknown';
-    }
+//         rtc.onicecandidate = (event) => {
+//             if (event.candidate) {
+//                 const ipMatch = event.candidate.candidate.match(/([0-9.]+)/);
+//                 if (ipMatch) {
+//                     return ipMatch[1];
+//                 }
+//             }
+//         };
 
-    // Fallback to unreliable methods (may not work in all cases)
-    return 'Unknown';
+//         return 'Unknown';
+//     }
+
+//     // Fallback to unreliable methods (may not work in all cases)
+//     return 'Unknown';
+// }
+
+
+// export const getClientIP = async () => {
+//     const { RTCPeerConnection } = window;
+//     const pc = new RTCPeerConnection({ iceServers: [] });
+//     pc.createDataChannel('');
+//     pc.createOffer().then(pc.setLocalDescription.bind(pc)).catch(e => console.log(e));
+//     pc.onicecandidate = (ice) => {
+//       if (!ice || !ice.candidate || !ice.candidate.candidate) return;
+//       const ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3})/;
+//       const ipMatch = ice.candidate.candidate.match(ipRegex);
+//       const ip = ipMatch?.[1];
+//       console.log("tgisad")
+//       console.log(ip);
+//       pc.onicecandidate = () => {};
+//       return ip
+//     };
+//   };
+
+export async function getClientIP(): Promise<string> {
+    const response = await fetch('https://api.ipify.org?format=json');
+    const data = await response.json();
+    console.log(data.ip)
+    return data.ip as string
 }

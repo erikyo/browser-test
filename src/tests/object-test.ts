@@ -1,6 +1,7 @@
 import { getClientIP } from "../utils";
 
-const clientIP = getClientIP();
+//const clientIPPromise = getClientIP(); 
+
 const urlParametersToRemove = ['__hsfp', '__hssc', '__hstc', '__s', '_hsenc', '_openstat', 'dclid', 'fbclid', 'gclid', 'hsCtaTracking', 'mc_eid', 'mkt_tok', 'ml_subscriber', 'ml_subscriber_hash', 'msclkid', 'oly_anon_id', 'oly_enc_id', 'rb_clickid', 's_cid', 'vero_conv', 'vero_id', 'wickedid', 'yclid'];
 const trackingScripts = ['Adobe', 'Adobe Audience Manager', 'Amazon adsystem', 'AppNexus', 'Bing Ads', 'Chartbeat', 'Criteo', 'DoubleClick (Google)', 'Facebook tracking', 'Google (third-party ad pixel)', 'Google Analytics', 'Google Tag Manager', 'Index Exchange', 'New Relic', 'Quantcast', 'Scorecard Research', 'Beacon', 'Taboola', 'Twitter pixel', 'Yandex Ads'];
 const trackingCookies = ['Adobe', 'Adobe Audience Manager', 'Amazon adsystem', 'AppNexus', 'Bing Ads', 'Chartbeat', 'Criteo', 'DoubleClick (Google)', 'Facebook tracking', 'Google (third-party ad pixel)', 'Google Analytics', 'Google Tag Manager', 'Index Exchange', 'New Relic', 'Quantcast', 'Scorecard Research', 'Beacon', 'Taboola', 'Twitter pixel', 'Yandex Ads'];
@@ -8,7 +9,7 @@ const userLanguage = window.navigator.language || window.navigator.userLanguage;
 
 export const testObjects: ObjTest = {
     'Browser Features': [
-        { testName: 'Client IP', test: clientIP, value: clientIP },
+        { testName: 'Client IP', test: '', value: getClientIP()},
         // CacheStorage
         { testName: 'CacheStorage', test: 'caches' in window, value: window.caches },
         // Cookie support
