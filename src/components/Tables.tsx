@@ -14,11 +14,11 @@ const Tables = (props: ObjResult) => {
 
 
     return( 
-        <div>
+      <article className="border-2 border-gray-200">
         {Object.keys(props).map((key: string) => (
           <Table key={key} title={key} dataTableResults={props[key]} />
         ))}
-      </div>
+      </article>
     )
 }
 

@@ -1,5 +1,5 @@
 import  {TableColumn} from "react-data-table-component";
-import React,{lazy, Suspense} from "react";
+import React,{lazy, Suspense, useEffect} from "react";
 import Loading from "./Loading.tsx";
 
 /**
@@ -58,11 +58,13 @@ const Table = (props : {
 
     return (
         <Suspense fallback={<Loading />}>
-            <DataTable
-                title={title}
-                columns={columns}
-                data={dataTableResults}
-            />
+            <section className="border-2 border-gray-200">
+                <caption className="table-title flex mx-4 mt-4 text-2xl font-semibold">{title}</caption>
+                <DataTable
+                    columns={columns}
+                    data={dataTableResults}
+                />
+            </section>
         </Suspense>
     )
 };

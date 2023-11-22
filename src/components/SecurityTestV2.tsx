@@ -23,16 +23,22 @@ const SecurityTestV2 = () => {
     // }, [])
 
     const fetchData = useCallback(async () => {
-        const newDataTableResults = await checkSecuritiesByCategories(testObjects);
-        setDataTableResults(newDataTableResults);
-      }, [])
-
-
-    useEffect( () => {
-        fetchData().catch(e => console.log(e))
+        try {
+          const newDataTableResults = await checkSecuritiesByCategories(testObjects);
+          setDataTableResults(newDataTableResults);
+          return newDataTableResults;
+        } catch (e) {
+          console.error(e);
+        } finally {
+          setDataTableResults(newDataTableResults);
+        }
+      }, []);
+      
+      useEffect(() => {
+        fetchData().catch(e => console.log(e));
         const { newTestResults } = checkSecurity();
         setTestResults(newTestResults);
-    }, [fetchData])
+      }, [fetchData]);
 
     return (
         <main className="wrapper p-8">
