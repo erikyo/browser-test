@@ -22,14 +22,17 @@ const Table = (props : {
             name: 'ID',
             selector: (row) => row.id.toString(),
             sortable: true,
+            left: true,
             style: {
-                maxWidth: '32px',
+                minWidth:'64px',
+                maxWidth:'32px',
             }
         },
         {
             name: 'Test Name',
             selector: (row) => row.testName,
             sortable: true,
+            left: true,
             style: {
                 minWidth: '100px'
             }
@@ -38,8 +41,9 @@ const Table = (props : {
             name: 'Value',
             selector: (row) => row.value.toString(),
             sortable: true,
+            left: true,
             style: {
-                width: '320px',
+                minWidth: '64px',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
@@ -49,7 +53,7 @@ const Table = (props : {
             name: 'Result',
             selector: (row) => row.result.toString(),
             sortable: true,
-            right: true,
+            left: true,
             style: {
                 maxWidth: '32px',
             }
@@ -59,8 +63,8 @@ const Table = (props : {
     return (
         <Suspense fallback={<Loading />}>
             <section className="border-2 border-gray-200">
-                <caption className="table-title flex mx-4 mt-4 text-2xl font-semibold">{title}</caption>
                 <DataTable
+                    title={title}
                     columns={columns}
                     data={dataTableResults}
                 />

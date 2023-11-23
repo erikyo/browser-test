@@ -14,7 +14,7 @@ const Tables = (props: ObjResult) => {
 
 
     return( 
-      <article className="border-2 border-gray-200">
+      <article className="mx-auto max-w-screen-xl px-4 py-16">
         {Object.keys(props).map((key: string) => (
           <Table key={key} title={key} dataTableResults={props[key]} />
         ))}
