@@ -1,9 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {resultColor} from "../utils/";
 
 interface ChartData {
     testName: string;
     result: number | string;
 }
+
 
 const SecChart = (props: {
     results: ChartData[]
@@ -97,7 +99,7 @@ const SecChart = (props: {
         chartRef: React.RefObject<HTMLCanvasElement>,
         chartData: {
             testName: string;
-            result: string | number
+            result: number;
         }
     ) {
         const result = [chartData.result, 100 - chartData.result];
@@ -105,7 +107,7 @@ const SecChart = (props: {
             datasets: [
                 {
                     data: result,
-                    backgroundColor: ['#5850EC', '#eee'],
+                    backgroundColor: [resultColor(chartData.result), '#eee'],
                     borderWidth: 0,
                     legend: {
                         display: false
