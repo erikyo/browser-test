@@ -7,7 +7,7 @@ export const calculateSecurityScore = (results) => {
     return successfulTests / totalTests;
 }
 
-export const roundToDecimals = (value:number, digits = 2): string => {
+export const getScore = (value:number, digits = 2): string => {
     const result = calculateSecurityScore(value)
     return (result * 100).toFixed(digits)
 }

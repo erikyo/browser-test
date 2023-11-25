@@ -3,7 +3,7 @@ import checkSecurity from "../tests/";
 import Table from './Table.tsx';
 import Recap from "./Recap.tsx";
 import SecChart from "./Chart.tsx";
-import {roundToDecimals} from "../utils";
+import {getScore} from "../utils";
 
 
 const SecurityTest = () => {
@@ -38,8 +38,9 @@ const SecurityTest = () => {
                             <Recap />
 
                             {testResults ? <SecChart results={[
-                                {result: roundToDecimals(testResults, 1), testName: 'Security'},
-                                {result: roundToDecimals(testResults, 1), testName: 'Fingerprint'}
+                                {result: getScore(testResults, 1), testName: 'Features'},
+                                {result: getScore(testResults, 1), testName: 'Security'},
+                                {result: getScore(testResults, 1), testName: 'Fingerprint'}
                             ]}/> : null}
                         </div>
 
